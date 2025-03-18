@@ -12,7 +12,6 @@ class ProductCategorySeeder extends Seeder
     {
         $faker = Faker::create();
 
-        // Tạo danh mục sản phẩm
         $categories = ['Electronics', 'Clothing', 'Books', 'Home & Kitchen'];
 
         foreach ($categories as $category) {
@@ -23,10 +22,8 @@ class ProductCategorySeeder extends Seeder
             ]);
         }
 
-        // Lấy danh sách ID của các danh mục
         $categoryIds = DB::table('categories')->pluck('id')->toArray();
 
-        // Thêm một số sản phẩm cố định
         DB::table('products')->insert([
             [
                 'name' => 'Laptop',
@@ -54,13 +51,12 @@ class ProductCategorySeeder extends Seeder
             ],
         ]);
 
-        // Thêm 100 sản phẩm giả bằng Faker
         for ($i = 0; $i < 100; $i++) {
             DB::table('products')->insert([
                 'name' => $faker->word(),
                 'description' => $faker->sentence(),
-                'price' => $faker->randomFloat(2, 5, 200), // Giá từ 5 đến 200
-                'category_id' => $faker->randomElement($categoryIds), // Chọn ngẫu nhiên một danh mục
+                'price' => $faker->randomFloat(2, 5, 200),
+                'category_id' => $faker->randomElement($categoryIds),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
